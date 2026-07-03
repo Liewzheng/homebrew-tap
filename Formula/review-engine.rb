@@ -25,11 +25,11 @@ class ReviewEngine < Formula
     end
   end
 
-def install
-  bin.install "review-engine"
-end
+  def install
+    bin.install "review-engine"
+  end
 
-test do
-  system "#{bin}/review-engine", "--version"
-end
+  test do
+    system "#{bin}/review-engine", "--version"
+  end
 end
