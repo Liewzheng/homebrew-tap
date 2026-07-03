@@ -1,0 +1,100 @@
+name: Update Formula
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get latest release tag
+        id: release
+        run: |
+          TAG=$(curl -sL https://api.github.com/repos/Liewzheng/ReviewEngine/releases/latest \
+            | jq -r .tag_name)
+          echo "tag=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Check current version
+        id: check
+        run: |
+          CURRENT=$(sed -n 's/^  version "\(.*\)"/\1/p' Formula/review-engine.rb)
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "latest=${{ steps.release.outputs.tag }}, current=$CURRENT"
+
+      - name: Download, compute SHA256, and update Formula
+        if: steps.check.outputs.current != steps.release.outputs.tag
+        id: update
+        run: |
+          VERSION="${{ steps.release.outputs.tag }}"
+          mkdir -p /tmp/assets
+          cd /tmp/assets
+
+          # target triple → Homebrew platform conditions
+          declare -A PLATFORMS
+          PLATFORMS["aarch64-apple-darwin"]="OS.mac?|Hardware::CPU.arm?"
+          PLATFORMS["x86_64-apple-darwin"]="OS.mac?|Hardware::CPU.intel?"
+          PLATFORMS["aarch64-unknown-linux-gnu"]="OS.linux?|Hardware::CPU.arm?"
+          PLATFORMS["x86_64-unknown-linux-gnu"]="OS.linux?|Hardware::CPU.intel?"
+
+          declare -A SHAS
+          for target in "${!PLATFORMS[@]}"; do
+            asset="review-engine-${target}.tar.gz"
+            url="https://github.com/Liewzheng/ReviewEngine/releases/download/v${VERSION}/${asset}"
+            if curl -sLf "$url" -o "$asset" 2>/dev/null; then
+              sha=$(sha256sum "$asset" | cut -d' ' -f1)
+              SHAS[$target]=$sha
+              echo "Downloaded $target: $sha"
+            else
+              echo "Skipping $target (not found)"
+            fi
+          done
+
+          # Generate formula
+          cat > Formula/review-engine.rb << FORMULA
+          class ReviewEngine < Formula
+            desc "A virtual CodeReview Board for your code — multi-expert, scored, and actionable"
+            homepage "https://github.com/Liewzheng/ReviewEngine"
+            version "${VERSION}"
+            license "Apache-2.0"
+
+          FORMULA
+
+          for target in "${!PLATFORMS[@]}"; do
+            [ -z "${SHAS[$target]}" ] && continue
+            IFS='|' read -r os_check arch_check <<< "${PLATFORMS[$target]}"
+            cat >> Formula/review-engine.rb << FORMULA
+            if ${os_check}
+              if ${arch_check}
+                url "https://github.com/Liewzheng/ReviewEngine/releases/download/v${VERSION}/review-engine-${target}.tar.gz"
+                sha256 "${SHAS[$target]}"
+              end
+            end
+
+          FORMULA
+          done
+
+          cat >> Formula/review-engine.rb << 'FORMULA'
+          def install
+            bin.install "review-engine"
+          end
+
+          test do
+            system "#{bin}/review-engine", "--version"
+          end
+          end
+          FORMULA
+
+      - name: Commit and push
+        if: steps.check.outputs.current != steps.release.outputs.tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/review-engine.rb
+          git commit -m "chore: update review-engine to v${{ steps.release.outputs.tag }}"
+          git push
