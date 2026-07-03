@@ -32,6 +32,7 @@ jobs:
         id: update
         run: |
           VERSION="${{ steps.release.outputs.tag }}"
+          FORMULA_FILE="${{ github.workspace }}/Formula/review-engine.rb"
           mkdir -p /tmp/assets
           cd /tmp/assets
 
@@ -56,7 +57,7 @@ jobs:
           done
 
           # Generate formula
-          cat > Formula/review-engine.rb << FORMULA
+          cat > "$FORMULA_FILE" << FORMULA
           class ReviewEngine < Formula
             desc "A virtual CodeReview Board for your code — multi-expert, scored, and actionable"
             homepage "https://github.com/Liewzheng/ReviewEngine"
@@ -68,7 +69,7 @@ jobs:
           for target in "${!PLATFORMS[@]}"; do
             [ -z "${SHAS[$target]}" ] && continue
             IFS='|' read -r os_check arch_check <<< "${PLATFORMS[$target]}"
-            cat >> Formula/review-engine.rb << FORMULA
+            cat >> "$FORMULA_FILE" << FORMULA
             if ${os_check}
               if ${arch_check}
                 url "https://github.com/Liewzheng/ReviewEngine/releases/download/v${VERSION}/review-engine-${target}.tar.gz"
@@ -79,7 +80,7 @@ jobs:
           FORMULA
           done
 
-          cat >> Formula/review-engine.rb << 'FORMULA'
+          cat >> "$FORMULA_FILE" << 'FORMULA'
           def install
             bin.install "review-engine"
           end
