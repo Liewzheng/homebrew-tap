@@ -81,13 +81,13 @@ jobs:
           done
 
           cat >> "$FORMULA_FILE" << 'FORMULA'
-          def install
-            bin.install "review-engine"
-          end
+            def install
+              bin.install "review-engine"
+            end
 
-          test do
-            system "#{bin}/review-engine", "--version"
-          end
+            test do
+              system "#{bin}/review-engine", "--version"
+            end
           end
           FORMULA
 
