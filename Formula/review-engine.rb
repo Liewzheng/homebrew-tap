@@ -1,27 +1,27 @@
 class ReviewEngine < Formula
   desc "A virtual CodeReview Board for your code — multi-expert, scored, and actionable"
   homepage "https://github.com/Liewzheng/ReviewEngine"
-  version "0.6.8"
+  version "0.6.9"
   license "Apache-2.0"
 
   if OS.linux?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.6.8/review-engine-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "846238a061c6d2e016f795a90e9b58c8920d120bbbb5129ac4030a0f903116b1"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.6.9/review-engine-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "4c6d140ef567152d6b0aced8111235bb939016c526c8436030db07cd84596793"
     end
   end
 
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.6.8/review-engine-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "5c176a8928bf13631a7e31b9632d01dbbd184700c4467f4e407b0a617c5c9352"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.6.9/review-engine-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "2171a9dfadcdf0959e6d5add0dd9aa0c83f7cc7176b023d9b45a81cf53adadc8"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.6.8/review-engine-aarch64-apple-darwin.tar.gz"
-      sha256 "ced4c5baf7313d9832c3ea0e38a3c235509b1442fd6be0210d074a346126d5bd"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.6.9/review-engine-aarch64-apple-darwin.tar.gz"
+      sha256 "5225d2458d3b72dec92d62299cd6af9a700af782b59448c5ad73df6ef791fdc0"
     end
   end
 
