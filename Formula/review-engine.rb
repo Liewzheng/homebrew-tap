@@ -1,34 +1,34 @@
 class ReviewEngine < Formula
   desc "A virtual CodeReview Board for your code — multi-expert, scored, and actionable"
   homepage "https://github.com/Liewzheng/ReviewEngine"
-  version "0.8.1"
+  version "0.8.2"
   license "Apache-2.0"
 
   if OS.linux?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.1/review-engine-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "801bb529a52062f178dd63922715e22221eaac20a2d1cafc12a91aaf4d582709"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.2/review-engine-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "bf119da6f9d3ed2526bfadc84a233b676b59e0aed733fbef4b47854ef89c60f7"
     end
   end
 
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.1/review-engine-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "a32ed6b951072b83f959944600fd1a65c1d4d8eefbe31e891c3e0154c49a58c9"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.2/review-engine-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "ba2ee581fc1ba0f0328869d4c2f126fa0c8524c656cf3edde63024949aac538e"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.1/review-engine-aarch64-apple-darwin.tar.gz"
-      sha256 "e6a268e81ce11b6ac93e1eb8f4cfb55cf573f4e90a8e6f70487437eb133f771b"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.2/review-engine-aarch64-apple-darwin.tar.gz"
+      sha256 "e58bb058b81aef2ab2ade03e1686cc20b42ec55a5011b106a0792411b6357170"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.1/review-engine-x86_64-apple-darwin.tar.gz"
-      sha256 "51fb7f1923a369c459cc4ae1592951dcfea918b1a6eebeed1e6ea5447a2f65ec"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.8.2/review-engine-x86_64-apple-darwin.tar.gz"
+      sha256 "5da978f3d9d6a22c7146237c45a30197ea5a890c3765641be342310e7ce79ed8"
     end
   end
 
