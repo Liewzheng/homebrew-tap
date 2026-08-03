@@ -34,6 +34,7 @@ class ReviewEngine < Formula
 
   def install
     bin.install "review-engine"
+    bin.install_symlink "review-engine" => "reng"
   end
 
   test do

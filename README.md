@@ -9,6 +9,8 @@ brew tap Liewzheng/tap
 brew install review-engine
 ```
 
+安装后提供两个命令：`review-engine` 与短别名 `reng`（二者等价）。
+
 ## 包含的软件
 
 | 工具 | 说明 |

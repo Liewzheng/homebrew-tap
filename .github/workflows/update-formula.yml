@@ -83,6 +83,7 @@ jobs:
           cat >> "$FORMULA_FILE" << 'FORMULA'
             def install
               bin.install "review-engine"
+              bin.install_symlink "review-engine" => "reng"
             end
 
             test do
