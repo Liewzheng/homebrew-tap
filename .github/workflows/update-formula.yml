@@ -15,23 +15,42 @@ jobs:
 
       - name: Get latest release tag
         id: release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG=$(curl -sL https://api.github.com/repos/Liewzheng/ReviewEngine/releases/latest \
+          TAG=$(curl -sL --fail \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            https://api.github.com/repos/Liewzheng/ReviewEngine/releases/latest \
             | jq -r .tag_name)
+          echo "latest_tag=$TAG"
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Resolved release tag '${TAG}' is not a valid semver (expected ^vX.Y.Z). Aborting; refusing to write a formula with a null/empty version." >&2
+            exit 1
+          fi
           echo "tag=${TAG#v}" >> "$GITHUB_OUTPUT"
 
       - name: Check current version
         id: check
         run: |
           CURRENT=$(sed -n 's/^  version "\(.*\)"/\1/p' Formula/review-engine.rb)
+          if [ -z "$CURRENT" ]; then
+            echo "::error::Could not read current version from Formula/review-engine.rb; aborting." >&2
+            exit 1
+          fi
           echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
           echo "latest=${{ steps.release.outputs.tag }}, current=$CURRENT"
 
       - name: Download, compute SHA256, and update Formula
         if: steps.check.outputs.current != steps.release.outputs.tag
         id: update
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION="${{ steps.release.outputs.tag }}"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Release tag output '${VERSION}' is not a valid version; aborting before writing the formula." >&2
+            exit 1
+          fi
           FORMULA_FILE="${{ github.workspace }}/Formula/review-engine.rb"
           mkdir -p /tmp/assets
           cd /tmp/assets
@@ -47,7 +66,7 @@ jobs:
           for target in "${!PLATFORMS[@]}"; do
             asset="review-engine-${target}.tar.gz"
             url="https://github.com/Liewzheng/ReviewEngine/releases/download/v${VERSION}/${asset}"
-            if curl -sLf "$url" -o "$asset" 2>/dev/null; then
+            if curl -sLf -H "Authorization: Bearer ${GH_TOKEN}" "$url" -o "$asset" 2>/dev/null; then
               sha=$(sha256sum "$asset" | cut -d' ' -f1)
               SHAS[$target]=$sha
               echo "Downloaded $target: $sha"
@@ -55,6 +74,11 @@ jobs:
               echo "Skipping $target (not found)"
             fi
           done
+
+          if [ ${#SHAS[@]} -eq 0 ]; then
+            echo "::error::No release assets could be downloaded for v${VERSION}; refusing to write an empty formula." >&2
+            exit 1
+          fi
 
           # Generate formula
           cat > "$FORMULA_FILE" << FORMULA
@@ -95,6 +119,10 @@ jobs:
       - name: Commit and push
         if: steps.check.outputs.current != steps.release.outputs.tag
         run: |
+          if git diff --quiet -- Formula/review-engine.rb; then
+            echo "Formula content unchanged after update; skipping commit."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add Formula/review-engine.rb
