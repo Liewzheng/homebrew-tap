@@ -1,34 +1,34 @@
 class ReviewEngine < Formula
   desc "A virtual CodeReview Board for your code — multi-expert, scored, and actionable"
   homepage "https://github.com/Liewzheng/ReviewEngine"
-  version "0.10.0"
+  version "0.10.1"
   license "Apache-2.0"
 
   if OS.linux?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.0/review-engine-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "363dda17e0a3347202e1670faa8e34ce46a6991c19dccb9c1eb63b9dfb9887da"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.1/review-engine-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "6e4f067dbf0e4036d504f171a4aa9859a831d3cf9eed554a34e343dbfcd6ea05"
     end
   end
 
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.0/review-engine-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "a7f10055dc56831b1c6dd9960055f250668ec1dea9428b28e8550937beee4b1a"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.1/review-engine-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "a860cdab15e764b2d5c0adac3ffeaac7f13d94645ffc2d6aa08fa2068cf2a866"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.0/review-engine-aarch64-apple-darwin.tar.gz"
-      sha256 "d535301ef2a5bdbadd069fe463f53ecc252aeebaaef2256a989be22946db25c1"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.1/review-engine-aarch64-apple-darwin.tar.gz"
+      sha256 "949f4fe16bf923d75f119f31bfac8cff34f18c874f54622939ce60cdee10762e"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.0/review-engine-x86_64-apple-darwin.tar.gz"
-      sha256 "6935c70c3bb7c35ea7f1794d950a198ac571141d3ab64978aa19281368844c94"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.1/review-engine-x86_64-apple-darwin.tar.gz"
+      sha256 "eeb03f8b512d65b235de32c13428452474947ef3dcf99bf9599ecccb5ac72a48"
     end
   end
 
