@@ -1,34 +1,34 @@
 class ReviewEngine < Formula
   desc "A virtual CodeReview Board for your code — multi-expert, scored, and actionable"
   homepage "https://github.com/Liewzheng/ReviewEngine"
-  version "0.10.25"
+  version "0.10.26"
   license "Apache-2.0"
 
   if OS.linux?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.25/review-engine-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "a99f55b532ec77649d89dcf6ed37a91c67d448cd0cd09570c298416a28cceae9"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.26/review-engine-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "12e291f952211af1cf4147c570d226910878bda769f3762efafd395f7615375d"
     end
   end
 
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.25/review-engine-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "9f1bac5e410b1ba3ac4fed44be8f68a88e073fa9718cf13730d6648ec5364063"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.26/review-engine-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "5aeaa832bc27385fa7162df65b065736ebdc241119412fe115e64ba6626eaa0c"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.25/review-engine-aarch64-apple-darwin.tar.gz"
-      sha256 "63e672181a5c7c2dc0e6a9f21c19d8950e72083bb3732ada63a77c3693c8b66e"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.26/review-engine-aarch64-apple-darwin.tar.gz"
+      sha256 "3d566a10e98f0fe056b0f181b13d95de49a9530242030dddf7e5ede5e9f80675"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.25/review-engine-x86_64-apple-darwin.tar.gz"
-      sha256 "c12ae00f8d44f35fde0ad834e5435e25de154bc14a3493aa1f9737f06db0bb1f"
+      url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.10.26/review-engine-x86_64-apple-darwin.tar.gz"
+      sha256 "cf5982e9323d0c30e88fe426ef2fc5a6c0f93068050cb9ff5ebc65671bee6daa"
     end
   end
 
