@@ -7,28 +7,28 @@ class ReviewEngine < Formula
   if OS.linux?
     if Hardware::CPU.intel?
       url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.11.0/review-engine-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "020d69b94c35fd6d901dfaa5883321a97a390f9012c5b549cc1e3a2f3fd6c215"
+      sha256 "8a48b78150f47406396dbf20fc7fdd7a7851ea86b7b2e8f66976d1dd7da38045"
     end
   end
 
   if OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.11.0/review-engine-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "c3ade26b128a3f3fc82d483b4bdb6f6154ac336ae7abaa9a1e0ffc835f7454bf"
+      sha256 "2284e460e05714535f8285358ed009d1bbb28b1ff380128ac7e53b38f6ac72f6"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.11.0/review-engine-aarch64-apple-darwin.tar.gz"
-      sha256 "eb4754007ab47c63023c74b08bfca02c29be33724d48a2cd704a2acaa52a6500"
+      sha256 "573c3d6148aaa4f5bdcc8b9d434241a1f91b97d5c618f4b064641553aa823dbc"
     end
   end
 
   if OS.mac?
     if Hardware::CPU.intel?
       url "https://github.com/Liewzheng/ReviewEngine/releases/download/v0.11.0/review-engine-x86_64-apple-darwin.tar.gz"
-      sha256 "c49973cc0efa6bc1226fd84924fc386c6fdf4e303c95f239b695dc8cb1cb119b"
+      sha256 "cd96d79c6871485f8c73c9b1530e98ef68d0372a697bced582a42e2cd1550013"
     end
   end
 
