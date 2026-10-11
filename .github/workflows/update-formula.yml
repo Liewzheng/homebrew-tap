@@ -41,7 +41,6 @@ jobs:
           echo "latest=${{ steps.release.outputs.tag }}, current=$CURRENT"
 
       - name: Download, compute SHA256, and update Formula
-        if: steps.check.outputs.current != steps.release.outputs.tag
         id: update
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -117,7 +116,6 @@ jobs:
           FORMULA
 
       - name: Commit and push
-        if: steps.check.outputs.current != steps.release.outputs.tag
         run: |
           if git diff --quiet -- Formula/review-engine.rb; then
             echo "Formula content unchanged after update; skipping commit."
