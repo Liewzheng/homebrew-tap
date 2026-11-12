@@ -1,25 +1,25 @@
 class Pbotcli < Formula
   desc "Rust CLI for Plane.so — provides the pbotcli and pbot binaries."
   homepage "https://github.com/Liewzheng/pbotcli"
-  version "1.5.1"
+  version "1.6.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.5.1/pbotcli-cli-aarch64-apple-darwin.tar.xz"
-      sha256 "968d092cce171111fb47ec64b5d893c38de7531c195a016baf4dca7fd7002b02"
+      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.6.0/pbotcli-cli-aarch64-apple-darwin.tar.xz"
+      sha256 "72ef610479a5d76dc9183b69ae70c54f9ceab4de40f2e46622b9ac98c4a89ae5"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.5.1/pbotcli-cli-x86_64-apple-darwin.tar.xz"
-      sha256 "f99eab7619fba710759d40c004270cbe32746c12a413e089b88b06bd848b8f1c"
+      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.6.0/pbotcli-cli-x86_64-apple-darwin.tar.xz"
+      sha256 "b06e20b6ba7d7ff15b85a6d8b4d010d1982aab53b73255e434d9c35ae8489a80"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.5.1/pbotcli-cli-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "2fb1ae1b090df8041b28138d42853050c867238530906248f0825a01686cb990"
+      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.6.0/pbotcli-cli-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "aa90fe92cd51bea8f4e9cdc8d3cc1af1f9071a5d806eb9d85146e3e6210c9e4d"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.5.1/pbotcli-cli-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "27d14c127b56b00d0eb6b10ddcdcca873fae8ede497cdb78762e2533cb4b3001"
+      url "https://github.com/Liewzheng/pbotcli/releases/download/v1.6.0/pbotcli-cli-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "6b7e6cdaec98667ac463e7e20eb1567f049471d56148aa15c7d78f7c43fceaad"
     end
   end
   license "MIT"
